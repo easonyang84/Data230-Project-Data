@@ -1,0 +1,65 @@
+Table,Column Name,Notes
+suppliers,supplier_company_id,UUID for Suppliers: companies (often manufacturers) that Consignees hire to produce their Products
+suppliers,supplier_country_code,Country code where the Supplier is located
+suppliers,supplier_in_east_china,Boolean indicating whether the supplier is located in East China (regional difference affects Flexport operations)
+suppliers,supplier_in_south_china,Boolean indicating whether the supplier is located in South China (regional difference affects Flexport operations)
+suppliers,bookings_feature_first_enabled_at,"UTC Timestamp of when the supplier became onboarded onto Flexport's online booking tool; if not onboarded onto the tool, Suppliers interact with our Consignees ""offline"" outside of Flexport and not via our platform"
+purchase_orders_and_bookings,purchase_order_id,"UUID for Purchase Orders (POs) via Flexport's ""Purchase Order Management Tool"""
+purchase_orders_and_bookings,shipment_id,UUID for each Shipment in Flexport's platform; POs to Shipments can be M:M
+purchase_orders_and_bookings,container_id,UUID for shipping containers used on a Shipment; there can be multiple containers used for 1 shipment or none at all (if the shipment is via Air or Trucking)
+purchase_orders_and_bookings,product_id,UUID for Products (SKUs) shipped by Flexport for the Consignee
+purchase_orders_and_bookings,consignee_company_id,UUID for Consignees: companies that pay Flexport to have their Products moved from Suppliers to final destination (often warehouses)
+purchase_orders_and_bookings,supplier_company_id,UUID for Suppliers: companies (often manufacturers) that Consignees hire to produce their Products
+purchase_orders_and_bookings,purchase_order_created_date,"UTC Timestamp of when the Consignee submitted the PO to the Supplier via Flexport's ""Purchase Order Management Tool"""
+purchase_orders_and_bookings,purchase_order_requested_cargo_ready_date,Consignee requested in the PO that their Products be ready for pickup at the Supplier by this date (local time)
+purchase_orders_and_bookings,purchase_order_requested_delivery_date,Consignee requested in the PO that their Products be delivered to final destination by this date (local time)
+purchase_orders_and_bookings,booking_created_date,"Supplier responded to Consignee's PO and confirmed their booking (""agreement"") of the PO at this UTC timestamp; there can be multiple bookings to one PO"
+purchase_orders_and_bookings,booking_cargo_ready_date,Supplier confirmed the (local time) date on which the Products would be ready for pickup
+purchase_orders_and_bookings,purchase_order_sku_count,Quantity of Product the Consignee requested in the PO
+purchase_orders_and_bookings,purchase_order_sku_price,Unit Price of Product the Consignee requested in the PO
+purchase_orders_and_bookings,booking_sku_count,Quantity of Product the Supplier confirmed would be produced for pickup
+purchase_orders_and_bookings,shipped_sku_count,Actual Quantity of Product that was shipped
+purchase_orders_and_bookings,shipped_sku_price,Actual Unit Price of Product that was shipped
+consignees,consignee_company_id,UUID for Consignees: companies that pay Flexport to have their Products moved from Suppliers to final destination (often warehouses)
+consignees,consignee_market_segment,Flexport's internal designation of the Consignee's market size/potential
+consignees,consignee_created_at,UTC Timestamp of when the Consignee became a Flexport client
+containers,shipment_id,UUID for each Shipment in Flexport's platform; POs to Shipments can be M:M
+containers,container_id,UUID for shipping containers used on a Shipment; there can be multiple containers used for 1 shipment or none at all (if the shipment is via Air or Trucking)
+containers,container_type,Type of container 
+containers,container_size,Size of container
+containers,volume_cbm,Volume (cbm) of the shipment goods
+containers,weight_kg,Weight (kg) of the shipment goods
+containers,container_utilization,Utilization percentage of the container
+shipments,shipment_id,UUID for each Shipment in Flexport's platform; POs to Shipments can be M:M
+shipments,shipment_created_in_system_date,Date in which the shipment is created in Flexport's system. This is typically the same date that the consignee requests a quote from Flexport
+shipments,mode,Transportation mode of the shipment from port to port (ocean or air)
+shipments,bco,"""BCO"" stands for Beneficial Cargo Owner. In BCO shipments, the Consignee has a direct contract with the Carrier for the freight and pays Flexport only a service charge for coordinating the shipment "
+shipments,freight_service,Description of the services the carrier is providing to Flexport; CY to CY (most common) means the carrier is providing service from container yard to container yard. Door to Door means the carrier is providing service from door to door
+shipments,freight_type,"Description of what services Flexport is providing to a client; Door to Door: Flexport arranges pickup from origin shipper's ""door,"" arranges everything in between, arranges delivery to destination ""door"". Port to Port: includes services from origin port to destination port."
+shipments,incoterms,Dictate what each party is responsible for as they relate to transportation. Ex Works (EXW): Buyer is responsible for everything from picking up the shipment at origin to final delivery of the shipment at destination. Free On Board (FOB): Seller is responsible for arranging delivery and loading at origin port. Buyer is responsible for everything else. 
+shipments,contains_dangerous_goods,Boolean indicating whether or not any dangerous goods exist in the cargo
+shipments,supplier_company_id,UUID for Suppliers: companies (often manufacturers) that Consignees hire to produce their Products
+shipments,consignee_company_id,UUID for Consignees: companies that pay Flexport to have their Products moved from Suppliers to final destination (often warehouses)
+shipments,supplier_lat,Latitude coordinate of the supplier address
+shipments,supplier_lng,Longitude coordinate of the supplier address
+shipments,departure_port,Port where the cargo is leaving from (export)
+shipments,arrival_port,Port where the cargo is being delivered to (import)
+shipments,inland_port,Port where cargo is transported to if transportation to an inland intermodeal terminal is necessary prior to arriving at the final destination
+shipments,consignee_final_destination_lat,Latitude coordinate of the final destination of the shipment
+shipments,consignee_final_destination_lng,Longitude coordinate of the final destination of the shipment
+shipments,tradelane,"Route of the shipment; (ex: TPEB = Trans-Pacific Eastbound, FEWB = Far East Westbound, TPWB = Trans-Pacific Westbound)"
+shipments,freight_carrier,The asset-owning transportation company that is responsible for transporting the cargo
+shipments,actual_cargo_ready_date,Actual local date when the cargo was ready for pickup from the supplier 
+shipments,scheduled_departure_port_departure_date,Scheduled UTC timestamp when the cargo is expected to leave the departure port
+shipments,actual_departure_port_departure_date,Actual UTC timestamp when the cargo left the departure port
+shipments,scheduled_arrival_port_arrival_date,Scheduled UTC timestamp when the cargo is expected to arrive at the arrival port
+shipments,actual_arrival_port_arrival_date,Actual UTC timestamp when the cargo arrived at the arrival port
+shipments,scheduled_inland_port_arrival_date,Scheduled UTC timestamp when the cargo is expected to arrive at the inland port
+shipments,actual_inland_port_arrival_date,Actual UTC timestamp when the cargo arrived at an inland port
+shipments,scheduled_delivery_date,Scheduled UTC timestamp when the cargo is expected to arrive at the final destination
+shipments,actual_delivery_date,Actual UTC timestamp when the cargo was delivered to the final destination
+shipments,includes_customs,Boolean indicating whether or not the consignee has purchased Flexport's customs services for this shipment
+shipments,target_net_revenue,"Flexport's goal for Net Revenue (Revenue minus Cost) on this shipment, based on internal client and shipment factors; Net Revenue is equivalent to ""Gross Revenue"" and does not include G&A, headcount salaries, etc., so it is not Net Profit. For this exercise, no need to consider Profit."
+shipments,estimated_total_cost,"Estimated cost to Flexport for our services provided to the consignee, based on our best predictions after the shipment services have been arranged"
+shipments,actual_total_cost,"Actual cost to Flexport for our services providedd to the consignee, talliedd once the shipment has finished"
+shipments,actual_total_invoice,"Actual revenue Flexport obtains from the consignee for the services provided, tallied once the shipment has finished"
